@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-
+#os import edirik
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +26,7 @@ SECRET_KEY = 'bn52!artl*a%%2rn%ypgw$3$zq4hz5s0@-qq=6blp0^sn8gnu('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -55,7 +56,8 @@ ROOT_URLCONF = 'djangoprojesi2.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        #templates folderin yolun burda gosteririk
+        'DIRS': [os.path.join (BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -117,6 +119,18 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
+#localda ve serverde islemesi ucun static foldere sorgu yaziriq
 
 STATIC_URL = '/static/'
+if DEBUG:
+    STATICFILES_DIRS = [
+        os.path.join (BASE_DIR, "static")
+    ]
+else:
+    STATIC_ROOT = os.path.join (BASE_DIR, "static")
+
+#media file folderin tanidiriq
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join (BASE_DIR, 'media')
+
 
